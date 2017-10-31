@@ -36,6 +36,11 @@ public class RestClientController {
 		return new ModelAndView("login");
 	}
 	
+	@RequestMapping("/denied")
+	public ModelAndView denied() {				
+		return new ModelAndView("denied");
+	}
+	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/add") 
 	public ModelAndView add(Product product) {

@@ -8,9 +8,9 @@ import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Setter
 @Getter
+@Entity
 public class Product {
 
 	@Id
@@ -25,18 +25,31 @@ public class Product {
 
     @Min(0)
     private float price;
-
+	
 	protected Product() {
 		;
 	}
-
+	
 	public Product(int code, String name, String desc, float price) {
 		this.code = code;
 		this.name = name;
 		this.desc = desc;
 		this.price = price;
 	}
-		
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Product)) {
+			return false;
+		}
+		Product p = (Product) obj;
+		return p.code == this.code && p.name == this.name && 
+				p.desc == this.desc && p.price == this.price;
+	}
+	
 	@Override 
 	public String toString() {
 		return String.format("Code : %d Name : %s, Desc : %s, Price : %f", code, name, desc, price);

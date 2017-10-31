@@ -24,7 +24,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String user;
+    private String name;
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -34,14 +34,22 @@ public class User {
     	;
     }
     
-    public User(String user, String password, List<GrantedAuthority> roles) {
-        this.user = user;
+    public User(String name, String password, List<GrantedAuthority> roles) {
+        this.name = name;
         this.password = new BCryptPasswordEncoder().encode(password);
         this.roles = roles;
     }
 
-	public List<GrantedAuthority> getRoles() {
-		return this.roles;
-	}
-    
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		User u = (User) obj;
+		return u.name == this.name && u.roles.equals(this.roles);
+	}    
 }

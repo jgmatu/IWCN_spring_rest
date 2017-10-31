@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import es.urjc.javsan.master.customers.UserRepository;
+import es.urjc.javsan.master.customers.UsersRepo;
 import es.urjc.javsan.master.entities.User;
 
 
@@ -20,14 +20,14 @@ import es.urjc.javsan.master.entities.User;
 public class AuthProviderProducts implements AuthenticationProvider {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepo userRepository;
     
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        User user = userRepository.findByUser(username);
+        User user = userRepository.findByName(username);
         if (user == null) {
             throw new BadCredentialsException("User not found");
         }

@@ -5,10 +5,6 @@
 		<title>Hello world!!</title>
 	</head>
 	<body>	
-		<h1>
-		    Hello <span sec:authentication="name"></span>
-		</h1>
-		
 		<ul> 
 			<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add" th:text="#{create}"></a></li>
 			<li><a href="/list" th:text="#{list}"></a></li>

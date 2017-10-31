@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -14,6 +15,11 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @SpringBootApplication
 public class ManagementProductsApiRestClientApplication extends WebMvcConfigurerAdapter {
 
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+	
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource msgSrc = new ResourceBundleMessageSource();

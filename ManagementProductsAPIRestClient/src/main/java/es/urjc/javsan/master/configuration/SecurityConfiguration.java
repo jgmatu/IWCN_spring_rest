@@ -26,14 +26,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Paths that cannot be visited without authentication
         http.authorizeRequests().anyRequest().authenticated();
-        
+        	
         // Login form...
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
         http.formLogin().defaultSuccessUrl("/home");
         http.formLogin().failureUrl("/login?error");
-
+        http.formLogin().and().exceptionHandling().accessDeniedPage("/denied");
+        
         // Logout...
         http.logout().logoutUrl("/logout");
         http.logout().logoutSuccessUrl("/login?logout");
