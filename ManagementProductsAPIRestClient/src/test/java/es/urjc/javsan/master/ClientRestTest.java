@@ -46,11 +46,13 @@ public class ClientRestTest {
 		Product p = new Product(11, "test", "testing", 1.0f);
 		String url = REST + "/add";
 		
-		when(restTemplateTest.postForObject(url, p, String.class)).then(answer ->{
-        	return RESULT;
-        });
+		when(restTemplateTest.postForEntity(url, p, String.class)).then(answer ->{
+			HttpHeaders responseHeaders = new HttpHeaders();
+			
+        	return new ResponseEntity<String>(RESULT, responseHeaders, HttpStatus.CREATED);
+		});
 		assertEquals(RESULT, productsService.insert(p));
-	    verify(restTemplateTest, times(1)).postForObject(url, p, String.class);
+	    verify(restTemplateTest, times(1)).postForEntity(url, p, String.class);
 
 	}
 	
@@ -59,11 +61,13 @@ public class ClientRestTest {
 		Product p = new Product(11, "test", "testing", 1.0f);
 		String url = REST + "/edit?code="+p.getCode();
 		
-		when(restTemplateTest.postForObject(url, p, String.class)).then(answer ->{
-        	return RESULT;
-        });
+		when(restTemplateTest.postForEntity(url, p, String.class)).then(answer ->{
+			HttpHeaders responseHeaders = new HttpHeaders();
+			
+        	return new ResponseEntity<String>(RESULT, responseHeaders, HttpStatus.CREATED);
+		});
 		assertEquals(RESULT, productsService.edit(p));
-	    verify(restTemplateTest, times(1)).postForObject(url, p, String.class);		
+	    verify(restTemplateTest, times(1)).postForEntity(url, p, String.class);		
 	}
 	
 	@Test
@@ -71,12 +75,13 @@ public class ClientRestTest {
 		Product p = new Product(11, "test", "testing", 1.0f);
 		String url = REST + "/product?code="+p.getCode();
 		
-		when(restTemplateTest.getForObject(url, Product.class)).then(answer ->{
-        	return p;
-        });
+		when(restTemplateTest.getForEntity(url, Product.class)).then(answer ->{
+			HttpHeaders responseHeaders = new HttpHeaders();
+        	return new ResponseEntity<Product>(p, responseHeaders, HttpStatus.CREATED);
+		});
 		assertNotNull(productsService.get(p.getCode()));
 		assertEquals(p, productsService.get(p.getCode()));
-	    verify(restTemplateTest, times(2)).getForObject(url, Product.class);
+	    verify(restTemplateTest, times(2)).getForEntity(url, Product.class);
 	}
 	
 	@Test
