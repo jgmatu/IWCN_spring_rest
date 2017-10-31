@@ -14,10 +14,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import es.urjc.javsan.master.configuration.ProductsDB;
+import es.urjc.javsan.master.configuration.ProductsRepository;
 import es.urjc.javsan.master.entities.Product;
 
 @RunWith(SpringRunner.class)
@@ -25,7 +25,7 @@ public class ProductsDBTest {
 
 	
 	@Mock
-	private CrudRepository<Product, Integer> productRepo;
+	private ProductsRepository productRepo;
 	
 	@InjectMocks
 	private ProductsDB productsDB;

@@ -41,8 +41,7 @@
 					<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Description Error</td>
 				</tr>
                 <tr>
-                    <td><button type="submit">Confirm</button></td>
-                    <td><a th:href="@{/home}">Back!</a></td>
+                    <td><button type="submit">Confirm</button></td><td><a href="/" th:text="'['+ #{cancel} + ']'"></a> </td>
                 </tr>
             </table>
 		</form>
